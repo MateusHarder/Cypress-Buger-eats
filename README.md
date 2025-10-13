@@ -3,6 +3,46 @@
 Esse é um projeto prático direto ao ponto de Cypress Discovery Degustação com o Papito.
 Nesse projeto eu adicionei mais alguns cenários de testes e também trabalhei com o faker para auxiliar criação de dados. 
 
+## 📁 Estrutura do Projeto
+
+```
+├── cypress/
+│   ├── e2e/                        # Arquivos de teste
+│   │   ├── cadastro.cy.js         # Testes de cadastro
+│   │   └── home.cy.js            # Testes da página inicial
+│   │
+│   ├── fixtures/                   # Dados para testes
+│   │   ├── cadastroData.json     # Dados para testes de cadastro
+│   │   ├── homeData.json        # Dados para testes da home
+│   │   ├── arquivos/            # Arquivos diversos
+│   │   │   └── teste_csv.csv
+│   │   └── images/             # Imagens para testes
+│   │
+│   ├── results/                    # Relatórios de execução
+│   │   ├── mochawesome_*.html    # Relatórios de teste
+│   │   └── assets/              # Recursos do relatório
+│   │
+│   ├── screenshots/                # Screenshots de falhas
+│   │   └── cadastro.cy.js/
+│   │
+│   └── support/                    # Arquivos de suporte
+│       ├── commands.js           # Comandos customizados
+│       ├── e2e.js               # Configurações de e2e
+│       └── pages/               # Page Objects
+│           ├── cadastro/        # PO - Cadastro
+│           │   ├── elements.js
+│           │   └── index.js
+│           └── home/           # PO - Home
+│               ├── elements.js
+│               └── index.js
+│
+├── spec-docs-folder/               # Documentação
+│   └── cypress-e2e.md
+│
+├── cypress.config.js               # Configuração do Cypress
+└── package.json                    # Dependências do projeto
+```
+
 ## ⚙️ Pré-requisitos
 
 ```bash
@@ -12,38 +52,55 @@ Nesse projeto eu adicionei mais alguns cenários de testes e também trabalhei c
 
 ## ⚙️ Instalação
 
-```
-# Instale as dependências.
+Para instalar todas as dependências do projeto, execute:
+
+```bash
 npm install
-
-# Instale as dependências de Upload de Arquivos.
-npm install cypress-file-upload
-
-# Instale as dependências do Faker.
-npm install @faker-js/faker
-
-# Instale as dependências do Mochawesome.
-npm install mochawesome
-
-# Instale as dependências do Doc-gen.
-npm install cypress-docgen
 ```
 
-## 🚀 Execução dos testes ]
+Isso instalará automaticamente:
+- Cypress v13.15.0
+- @faker-js/faker v9.8.0 (geração de dados de teste)
+- faker-br v0.4.1 (dados específicos para o Brasil)
+- cypress-file-upload v5.0.8 (upload de arquivos)
+- mochawesome v7.1.3 (relatórios)
+- cypress-docgen v1.0.0 (documentação)
+- @bahmutov/cy-grep v2.0.35 (filtragem de testes)
 
+## 🚀 Execução dos Testes
+
+O projeto possui os seguintes scripts configurados no `package.json`:
+
+```bash
+# Abrir o Cypress no modo interativo
+npm run cyOpen
+
+# Executar testes com geração de relatório Mochawesome
+npm run cyRunReport
+
+# Gerar documentação dos testes
+npm run docgen
 ```
-# Para abrir o Cypress no modo interativo.
-npx cypress open
 
-# Para executar o teste no modo headless.
+### � Comandos Adicionais
+
+```bash
+# Executar testes no modo headless
 npx cypress run
 
-# Para executar o teste e gerar o Report Mochawesome.
-npx cypress run --reporter mochawesome
+# Executar testes específicos usando tags
+npx cypress run --env grep="@tag"
 
-# Para gerar o arquivo de Doc-gen dos testes.
-npx cypress-docgen
+# Executar testes e gerar vídeos
+npx cypress run --record
 ```
+
+### 📝 Relatórios
+
+Os relatórios são gerados automaticamente nas seguintes localizações:
+- Relatórios Mochawesome: `cypress/results/`
+- Screenshots de falhas: `cypress/screenshots/`
+- Documentação gerada: `spec-docs-folder/`
 
 ## 💡 Testes
 
