@@ -59,13 +59,17 @@ npm install
 ```
 
 Isso instalará automaticamente:
-- Cypress v13.15.0
+- Cypress v15.18.1
+- Allure Cypress v3.10.2 (relatórios detalhados)
+- Allure Commandline v2.43.0 (geração de relatórios HTML)
 - @faker-js/faker v9.8.0 (geração de dados de teste)
 - faker-br v0.4.1 (dados específicos para o Brasil)
 - cypress-file-upload v5.0.8 (upload de arquivos)
-- mochawesome v7.1.3 (relatórios)
 - cypress-docgen v1.0.0 (documentação)
 - @bahmutov/cy-grep v2.0.35 (filtragem de testes)
+- cypress-plugin-grep-boxes v1.1.1 (interface de filtragem)
+
+**Pré-requisito:** Java instalado no sistema (necessário para Allure Report)
 
 ## 🚀 Execução dos Testes
 
@@ -75,8 +79,11 @@ O projeto possui os seguintes scripts configurados no `package.json`:
 # Abrir o Cypress no modo interativo
 npm run cyOpen
 
-# Executar testes com geração de relatório Mochawesome
-npm run cyRunReport
+# Executar testes no modo headless
+npm run cyRun
+
+# Executar testes com geração de relatório Allure
+npm run cuRunReport
 
 # Gerar documentação dos testes
 npm run docgen
@@ -85,20 +92,28 @@ npm run docgen
 ### � Comandos Adicionais
 
 ```bash
-# Executar testes no modo headless
-npx cypress run
-
-# Executar testes específicos usando tags
+# Executar testes com tags específicas
 npx cypress run --env grep="@tag"
 
-# Executar testes e gerar vídeos
-npx cypress run --record
+# Gerar apenas o relatório Allure (sem executar testes)
+npx allure generate allure-results -o allure-report
+
+# Abrir relatório gerado anteriormente
+npx allure open allure-report
 ```
 
-### 📝 Relatórios
+### � Relatórios Allure
 
-Os relatórios são gerados automaticamente nas seguintes localizações:
-- Relatórios Mochawesome: `cypress/results/`
+O script `npm run cuRunReport` automatiza todo o fluxo:
+1. Executa todos os testes Cypress
+2. Salva os resultados em `allure-results/`
+3. Gera um relatório HTML interativo em `allure-report/`
+4. Abre o relatório automaticamente no navegador
+
+### 📁 Locais dos Arquivos Gerados
+
+- Resultados dos testes: `allure-results/`
+- Relatórios Allure: `allure-report/`
 - Screenshots de falhas: `cypress/screenshots/`
 - Documentação gerada: `spec-docs-folder/`
 

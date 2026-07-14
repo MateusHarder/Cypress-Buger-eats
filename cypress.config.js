@@ -1,4 +1,5 @@
 const { defineConfig } = require("cypress");
+const { allureCypress } = require("allure-cypress/reporter");
 
 module.exports = defineConfig({
   e2e: {
@@ -7,13 +8,10 @@ module.exports = defineConfig({
       "grepFilterSpecs": true
     },
     setupNodeEvents(on, config) {
-    },
-    reporter: 'mochawesome',
-    reporterOptions: {
-      reportDir: 'cypress/results',
-      overwrite: false,
-      html: true,
-      json: false
+      allureCypress(on, config, {
+        resultsDir: "allure-results",
+      });
+      return config;
     },
     execTimeout: 10000,
     baseUrl: 'https://buger-eats.vercel.app'

@@ -85,7 +85,7 @@ describe('Cadastro', () => {
     })
 
     //Bug do site, o campo não tem validação se o cpf é válido.
-    it('Validar cadastro com CPF inválido.', () => {
+    it('Validar cadastro com CPF inválido.', { tags: '@bug' }, () => {
         cy.fill_sessionDados(dataFaker.name, faker.string.numeric(11), dataFaker.email, dataFaker.whatsapp)
         cy.fill_sessionEndereco(cadastroData.cep, faker.string.numeric(2), faker.lorem.word(5))
         cy.validade_sessionEndereco(cadastroData.address, cadastroData.cidade_uf, cadastroData.bairro)
@@ -95,7 +95,7 @@ describe('Cadastro', () => {
     })
 
     //Bug do site, o campos de WhatsApp não é mostrado como obrigatório.
-    it('Validar o cadastro apenas com campos obrigatórios informados.', () => {
+    it('Validar o cadastro apenas com campos obrigatórios informados.',  { tags: '@bug' }, () => {
         Cadastro.fillName(dataFaker.name)
         Cadastro.fillCPF(dataFaker.cpf)
         Cadastro.fillEmail(dataFaker.email)
@@ -114,7 +114,7 @@ describe('Cadastro', () => {
     })
 
     //Bug do site, permite enviar o formulário com o e-mail incorreto.
-    it('Validar cadastro com E-mail inválido.', () => {
+    it('Validar cadastro com E-mail inválido.',  { tags: '@bug' }, () => {
         const userName = faker.internet.userName();
         const invalidEmailBadDomain = `${userName}@.com`;
         const invalidEmailNoDotCom = `${userName}@gmail`;
